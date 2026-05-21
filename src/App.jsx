@@ -21,6 +21,7 @@ export default function App() {
   const [flagsFromDefault, setFlagsFromDefault] = useState(false);
   const [sessions, setSessions] = useState(0);
   const [isActive, setIsActive] = useState(false);
+  const [isPremium, setIsPremium] = useState(false);
 
   useEffect(() => {
     const initFlagsmith = async () => {
@@ -45,6 +46,16 @@ export default function App() {
 
     initFlagsmith();
   }, []);
+
+  const togglePremium = async () => {
+    if (isPremium) {
+      await flagsmith.logout();
+    } else {
+      await flagsmith.identify("user_premium", { plan: "premium" });
+    }
+    setIsPremium((p) => !p);
+    setFlagsLoaded((prev) => !prev);
+  };
 
   const { darkMode, shortBreak, statsWidget } = useFlags();
 
@@ -72,6 +83,16 @@ export default function App() {
           <MotivationalMessage visible={isActive} />
           {shortBreak && <BreakButton />}
           {statsWidget && <StatsWidget sessions={sessions} />}
+          <button
+            onClick={togglePremium}
+            className={`mt-8 px-4 py-1.5 rounded-full text-xs font-medium transition-colors ${
+              isPremium
+                ? "bg-amber-400 hover:bg-amber-500 text-amber-900"
+                : "bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-400"
+            }`}
+          >
+            {isPremium ? "Premium user" : "Free user"}
+          </button>
         </div>
       </div>
     </div>
