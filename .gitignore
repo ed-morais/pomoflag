@@ -1,0 +1,24 @@
+# dependencies
+node_modules/
+
+# environment
+.env
+.env.local
+.env.*.local
+
+# build output
+dist/
+dist-ssr/
+
+# editor / OS
+.DS_Store
+*.local
+.vscode/
+.idea/
+
+# personal notes and agent config — keep off GitHub
+LEARNING.md
+SETUP.md
+CLAUDE.md
+TASKS.md
+settings.json
