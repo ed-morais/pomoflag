@@ -9,11 +9,11 @@ import MotivationalMessage from "./components/MotivationalMessage";
 // Fallback values used when the Flagsmith API is unreachable
 const DEFAULT_FLAGS = {
   ui_dark_mode: { enabled: false },
-  feature_short_break: { enabled: true },
-  feature_stats_widget: { enabled: false },
+  feature_short_break: { enabled: false },
+  feature_stats_widget: { enabled: true },
   feature_sound_alerts: { enabled: false },
-  pomodoro_duration_minutes: { enabled: true, value: 25 },
-  motivational_message: { enabled: true, value: "Stay focused!" },
+  pomodoro_duration_minutes: { enabled: true, value: 30 },
+  motivational_message: { enabled: true, value: "Let's keep working!" },
 };
 
 export default function App() {
