@@ -14,12 +14,16 @@ function playBeep() {
   osc.stop(ctx.currentTime + 0.8);
 }
 
-export default function Timer({ onComplete }) {
+export default function Timer({ onComplete, onRunningChange }) {
   const { pomoDuration, soundAlerts } = useFlags();
 
   const [secondsLeft, setSecondsLeft] = useState(pomoDuration * 60);
   const [isRunning, setIsRunning] = useState(false);
   const intervalRef = useRef(null);
+
+  useEffect(() => {
+    onRunningChange?.(isRunning);
+  }, [isRunning]);
 
   // Re-initialise when the flag value changes
   useEffect(() => {

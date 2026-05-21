@@ -4,6 +4,7 @@ import { useFlags } from "./hooks/useFlags";
 import Timer from "./components/Timer";
 import BreakButton from "./components/BreakButton";
 import StatsWidget from "./components/StatsWidget";
+import MotivationalMessage from "./components/MotivationalMessage";
 
 // Fallback values used when the Flagsmith API is unreachable
 const DEFAULT_FLAGS = {
@@ -19,6 +20,7 @@ export default function App() {
   const [flagsLoaded, setFlagsLoaded] = useState(false);
   const [flagsFromDefault, setFlagsFromDefault] = useState(false);
   const [sessions, setSessions] = useState(0);
+  const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
     const initFlagsmith = async () => {
@@ -63,7 +65,11 @@ export default function App() {
           <p className="text-gray-400 dark:text-gray-500 text-sm mt-1 mb-8">
             {flagsFromDefault ? "offline mode" : ""}
           </p>
-          <Timer onComplete={() => setSessions((s) => s + 1)} />
+          <Timer
+            onComplete={() => setSessions((s) => s + 1)}
+            onRunningChange={setIsActive}
+          />
+          <MotivationalMessage visible={isActive} />
           {shortBreak && <BreakButton />}
           {statsWidget && <StatsWidget sessions={sessions} />}
         </div>
