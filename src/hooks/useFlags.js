@@ -1,4 +1,4 @@
-import flagsmith from "flagsmith";
+import flagsmith from "@flagsmith/flagsmith";
 
 // Centralises all flag access — flag names are case-sensitive
 export function useFlags() {

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import flagsmith from "flagsmith";
+import flagsmith from "@flagsmith/flagsmith";
 
 // Fallback values used when the Flagsmith API is unreachable
 const DEFAULT_FLAGS = {
