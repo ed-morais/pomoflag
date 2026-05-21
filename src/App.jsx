@@ -73,9 +73,13 @@ export default function App() {
       <div className="min-h-screen flex items-center justify-center bg-slate-100 dark:bg-gray-950 transition-colors duration-300">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Pomoflag</h1>
-          <p className="text-gray-400 dark:text-gray-500 text-sm mt-1 mb-6">
-            {flagsFromDefault ? "offline mode" : ""}
-          </p>
+          <div className="h-7 mt-1 mb-6 flex items-center justify-center">
+            {flagsFromDefault && (
+              <span className="px-3 py-1 rounded-full bg-red-100 dark:bg-red-900/40 text-red-600 dark:text-red-400 text-xs font-medium">
+                offline — using default flags
+              </span>
+            )}
+          </div>
 
           <div className={`relative rounded-2xl px-10 py-8 transition-all duration-500 ${
             isPremium
