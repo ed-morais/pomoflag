@@ -35,6 +35,7 @@ export default function App() {
             setFlagsLoaded((prev) => !prev);
           },
         });
+        flagsmith.startListening(60000);
         console.log("Flagsmith flags:", flagsmith.getAllFlags());
         setFlagsLoaded(true);
       } catch (error) {
