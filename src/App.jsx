@@ -73,14 +73,28 @@ export default function App() {
       <div className="min-h-screen flex items-center justify-center bg-slate-100 dark:bg-gray-950 transition-colors duration-300">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Pomoflag</h1>
-          <p className="text-gray-400 dark:text-gray-500 text-sm mt-1 mb-8">
+          <p className="text-gray-400 dark:text-gray-500 text-sm mt-1 mb-6">
             {flagsFromDefault ? "offline mode" : ""}
           </p>
-          <Timer
-            onComplete={() => setSessions((s) => s + 1)}
-            onRunningChange={setIsActive}
-          />
-          <MotivationalMessage visible={isActive} />
+
+          <div className={`relative rounded-2xl px-10 py-8 transition-all duration-500 ${
+            isPremium
+              ? "bg-white dark:bg-gray-900 ring-2 ring-amber-400 shadow-xl shadow-amber-300/40 dark:shadow-amber-500/20"
+              : "bg-white dark:bg-gray-900 shadow-md"
+          }`}>
+            {isPremium && (
+              <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-amber-400 text-amber-900 text-xs font-semibold tracking-wide">
+                ✦ Premium
+              </span>
+            )}
+            <Timer
+              onComplete={() => setSessions((s) => s + 1)}
+              onRunningChange={setIsActive}
+              isPremium={isPremium}
+            />
+            <MotivationalMessage visible={isActive} />
+          </div>
+
           {shortBreak && <BreakButton />}
           {statsWidget && <StatsWidget sessions={sessions} />}
           <button

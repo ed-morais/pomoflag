@@ -14,7 +14,7 @@ function playBeep() {
   osc.stop(ctx.currentTime + 0.8);
 }
 
-export default function Timer({ onComplete, onRunningChange }) {
+export default function Timer({ onComplete, onRunningChange, isPremium }) {
   const { pomoDuration, soundAlerts } = useFlags();
 
   const [secondsLeft, setSecondsLeft] = useState(pomoDuration * 60);
@@ -68,7 +68,7 @@ export default function Timer({ onComplete, onRunningChange }) {
 
   return (
     <div className="flex flex-col items-center gap-6">
-      <span className="text-7xl font-mono font-bold tracking-tight text-gray-800 dark:text-white">
+      <span className={`text-7xl font-mono font-bold tracking-tight transition-colors ${isPremium ? "text-amber-500" : "text-gray-800 dark:text-white"}`}>
         {mm}:{ss}
       </span>
       <div className="flex gap-3">
