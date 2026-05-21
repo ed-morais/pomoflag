@@ -27,6 +27,7 @@ export default function App() {
             setFlagsLoaded((prev) => !prev);
           },
         });
+        console.log("Flagsmith flags:", flagsmith.getAllFlags());
         setFlagsLoaded(true);
       } catch (error) {
         console.warn("Flagsmith init failed — using default flags", error);
