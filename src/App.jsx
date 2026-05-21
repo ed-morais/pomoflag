@@ -18,6 +18,7 @@ const DEFAULT_FLAGS = {
 
 export default function App() {
   const [flagsLoaded, setFlagsLoaded] = useState(false);
+  const [flagsTick, setFlagsTick] = useState(0);
   const [flagsFromDefault, setFlagsFromDefault] = useState(false);
   const [sessions, setSessions] = useState(0);
   const [isActive, setIsActive] = useState(false);
@@ -32,7 +33,7 @@ export default function App() {
           defaultFlags: DEFAULT_FLAGS,
           enableAnalytics: true,
           onChange: () => {
-            setFlagsLoaded((prev) => !prev);
+            setFlagsTick((t) => t + 1);
           },
         });
         flagsmith.startListening(5000);
@@ -55,7 +56,7 @@ export default function App() {
       await flagsmith.identify("user_premium", { plan: "premium" });
     }
     setIsPremium((p) => !p);
-    setFlagsLoaded((prev) => !prev);
+    setFlagsTick((t) => t + 1);
   };
 
   const { darkMode, shortBreak, statsWidget } = useFlags();
