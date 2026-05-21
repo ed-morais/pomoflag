@@ -36,7 +36,7 @@ export default function App() {
             setFlagsTick((t) => t + 1);
           },
         });
-        flagsmith.startListening(5000);
+        flagsmith.startListening(1000);
         console.log("Flagsmith flags:", flagsmith.getAllFlags());
         setFlagsLoaded(true);
       } catch (error) {
