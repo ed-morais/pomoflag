@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import flagsmith from "@flagsmith/flagsmith";
+import { useFlags } from "./hooks/useFlags";
 import Timer from "./components/Timer";
+import BreakButton from "./components/BreakButton";
+import StatsWidget from "./components/StatsWidget";
 
 // Fallback values used when the Flagsmith API is unreachable
 const DEFAULT_FLAGS = {
@@ -15,6 +18,7 @@ const DEFAULT_FLAGS = {
 export default function App() {
   const [flagsLoaded, setFlagsLoaded] = useState(false);
   const [flagsFromDefault, setFlagsFromDefault] = useState(false);
+  const [sessions, setSessions] = useState(0);
 
   useEffect(() => {
     const initFlagsmith = async () => {
@@ -40,22 +44,26 @@ export default function App() {
     initFlagsmith();
   }, []);
 
+  const { darkMode, shortBreak, statsWidget } = useFlags();
+
   if (!flagsLoaded) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
         <p className="text-gray-500 text-sm">Loading...</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+    <div className={`min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 transition-colors ${darkMode ? "dark" : ""}`}>
       <div className="text-center">
-        <h1 className="text-2xl font-bold text-gray-800">Pomoflag</h1>
+        <h1 className="text-2xl font-bold text-gray-800 dark:text-white">Pomoflag</h1>
         <p className="text-gray-400 text-sm mt-1 mb-8">
           {flagsFromDefault ? "offline mode" : ""}
         </p>
-        <Timer />
+        <Timer onComplete={() => setSessions((s) => s + 1)} />
+        {shortBreak && <BreakButton />}
+        {statsWidget && <StatsWidget sessions={sessions} />}
       </div>
     </div>
   );
