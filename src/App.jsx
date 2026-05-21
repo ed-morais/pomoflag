@@ -48,22 +48,25 @@ export default function App() {
 
   if (!flagsLoaded) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
+      <div className="flex items-center justify-center min-h-screen bg-slate-100">
         <p className="text-gray-500 text-sm">Loading...</p>
       </div>
     );
   }
 
+  // dark class must be on a parent element so dark: variants apply to all children
   return (
-    <div className={`min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 transition-colors ${darkMode ? "dark" : ""}`}>
-      <div className="text-center">
-        <h1 className="text-2xl font-bold text-gray-800 dark:text-white">Pomoflag</h1>
-        <p className="text-gray-400 text-sm mt-1 mb-8">
-          {flagsFromDefault ? "offline mode" : ""}
-        </p>
-        <Timer onComplete={() => setSessions((s) => s + 1)} />
-        {shortBreak && <BreakButton />}
-        {statsWidget && <StatsWidget sessions={sessions} />}
+    <div className={darkMode ? "dark" : ""}>
+      <div className="min-h-screen flex items-center justify-center bg-slate-100 dark:bg-gray-950 transition-colors duration-300">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Pomoflag</h1>
+          <p className="text-gray-400 dark:text-gray-500 text-sm mt-1 mb-8">
+            {flagsFromDefault ? "offline mode" : ""}
+          </p>
+          <Timer onComplete={() => setSessions((s) => s + 1)} />
+          {shortBreak && <BreakButton />}
+          {statsWidget && <StatsWidget sessions={sessions} />}
+        </div>
       </div>
     </div>
   );
