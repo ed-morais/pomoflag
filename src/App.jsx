@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import flagsmith from "@flagsmith/flagsmith";
+import Timer from "./components/Timer";
 
 // Fallback values used when the Flagsmith API is unreachable
 const DEFAULT_FLAGS = {
@@ -51,13 +52,10 @@ export default function App() {
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
       <div className="text-center">
         <h1 className="text-2xl font-bold text-gray-800">Pomoflag</h1>
-        <p className="text-gray-500 mt-2">
-          Flags loaded{" "}
-          {flagsFromDefault
-            ? "(from defaults — offline mode)"
-            : "from Flagsmith ✓"}
+        <p className="text-gray-400 text-sm mt-1 mb-8">
+          {flagsFromDefault ? "offline mode" : ""}
         </p>
-        {/* TODO: */}
+        <Timer />
       </div>
     </div>
   );
